@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO usuario (nome, cpf, email, numero, idade, instituicao, senha) VALUES ('$nome', '$cpf', '$email', '$numero', '$idade', '$instituicao', '$hashed_password')";
 
     if ($pdo->exec($sql)) {
-        echo "Cadastro realizado com sucesso! <a href='login.php'>Voltar ao Login</a>";
+        echo "Cadastro realizado com sucesso! <a href='index.php'>Voltar ao Login</a>";
     } else {
         echo "Erro: " . $sql . "<br>" . $pdo->errorInfo();
     }

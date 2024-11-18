@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['usuario_logado'])) {
-    header('Location: login.php'); // Redireciona para a página de login se não estiver logado
+    header('Location: index.php'); // Redireciona para a página de login se não estiver logado
     exit();
 }
 ?>
@@ -14,114 +14,110 @@ if (!isset($_SESSION['usuario_logado'])) {
     <title>CADASTRO</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            background-color: #f4f4f4;
-        }
-        .container {
-            display: flex;
-            width: 90%;
-            max-width: 1200px;
-            margin-top: 10px;
-        }
-        .form-section, .activities-section {
-            background-color: #fff;
-            border-radius: 8px;
-            padding: 50px;
-            box-shadow: 0 0 60px rgba(0, 0, 0, 0.1);
-        }
-        .form-section {
-            width: 30%;
-            margin-right: 20px;
-        }
-        .activities-section { /*muda o tamanho do quadrado de atividades*/
-            width: 60%;
-            text-align: center;
-        }
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        .activity-list {
-            list-style: none;
-            padding: 0;
-        }
-        .activity-list li {
-            padding: 10px; /*muda formatação dos dias da semana*/
-            border-bottom: 1px solid #ddd;
-        }
-        .activity-list li:last-child {
-            border-bottom: none;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-        input, select {
-            width: 100%; /* Aumenta a largura dos campos */
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        button {
-            padding: 10px 15px;
-            background-color: #000000;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #000000;
-        }
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center; /* Alinha a página no centro horizontal */
+    align-items: center;     /* Alinha a página no centro vertical */
+    height: 100vh;           /* Garante que a altura da tela seja 100% */
+}
+
+.container {
+    display: flex;
+    justify-content: center; /* Centraliza as seções horizontalmente */
+    align-items: center;     /* Centraliza as seções verticalmente */
+    width: 100%;             /* Certifique-se de que a largura ocupe toda a tela */
+    height: 100%;            /* Certifique-se de que a altura ocupe toda a tela */
+    box-sizing: border-box;
+    padding: 20px;           /* Dê um pouco de espaçamento nas bordas */
+}
+
+.activities-section {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 50px;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    width: 35%; /* Tamanho do bloco de atividades */
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.activity-list {
+    list-style: none;
+    padding: 0;
+}
+
+.activity-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.activity-list li:last-child {
+    border-bottom: none;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #333;
+}
+
+.update-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.update-button:hover {
+    background-color: #005f73;
+}
+
+.logout-button {
+    position: absolute;
+    top: 20px;
+    right: 20px; /* Coloca o botão "Sair" no canto superior direito */
+    padding: 10px 20px;
+    background-color: #ff4c4c; /* Cor do botão "Sair", vermelho */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.logout-button:hover {
+    background-color: #d43f3f; /* Hover do botão "Sair" */
+}
+
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Formulário -->
-        <div class="form-section">
-            <h1>Cadastro</h1>
-            <form>
+    <!-- Botão de "Atualizar dados cadastrais" no canto superior esquerdo -->
+    <button class="update-button" onclick="window.location.href='formulario_atualizar.php';">Atualizar dados cadastrais</button>
 
-                <form action="cadas.php" method="POST"></form>
+    <button class="logout-button" onclick="window.location.href='logout.php';">Sair</button>
 
-
-
-                <label for="nome">Nome:</label>
-                <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
-
-                <label for="cpf">CPF:</label>
-                <input type="text" id="cpf" name="cpf" placeholder="Digite seu CPF" required>
-                
-                <label for="email">E-mail:</label>
-                <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
-
-                <label for="numero">Celular:</label>
-                <input type="tel" id="numero" name="numero" placeholder="Digite seu celular" required>
-
-                <label for="idade">Idade:</label>
-                <input type="number" id="idade" name="idade" min="0" max="120" placeholder="Digite sua idade" required>
-                
-                <label for="instituicao">Instituição:</label>
-                <select id="instituicao" name="instituicao" required>
-                    <option value="" disabled selected>Selecione sua instituição</option>
-                    <option value="universidade1">Universidade 1</option>
-                    <option value="etec1">Etec 1</option>
-                    <option value="empresa1">Empresa 1</option>
-                    <option value="organizacao1">Organização 1</option>
-                </select>
-
-                <input type="password" name="senha" placeholder="senha" required>
-
-                <button type="submit" class="btn btn-dark">Atualizar</button>
-            </form>
-        </div>
+  
         
         <!-- Atividades -->
         <div class="activities-section">
@@ -133,7 +129,6 @@ if (!isset($_SESSION['usuario_logado'])) {
                     <p>Entrega de relatórios</p>
                 </li>
                 <li>
-                    
                     <p>Desenvolvimento de projeto</p>
                     <p>Revisão de código</p>
                 </li>
@@ -145,6 +140,6 @@ if (!isset($_SESSION['usuario_logado'])) {
             </ul>
         </div>
     </div>
-    <a href="logout.php">Sair</a>
+    
 </body>
 </html>
